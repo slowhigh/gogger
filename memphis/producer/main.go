@@ -24,17 +24,21 @@ func main() {
 		os.Exit(1)
 	}
 
-	message := Message{
-		Message: "new message",
-	}
+	for i := 0; i < 1000000; i++ {
+		message := Message{
+			Message: fmt.Sprintf("msg - %d", i),
+		}
 
-	binary, err := json.Marshal(message)
-	if err != nil {
-		panic(err)
-	}
+		binary, err := json.Marshal(message)
+		if err != nil {
+			panic(err)
+		}
 
-	err = p.Produce(binary, memphis.AsyncProduce())
-	if err != nil {
-		panic(err)
+		err = p.Produce(binary, memphis.AsyncProduce())
+		if err != nil {
+			panic(err)
+		}
+
+		fmt.Printf("[Publish] %s\n", message.Message)
 	}
 }
