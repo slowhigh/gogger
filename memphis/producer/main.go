@@ -1,10 +1,11 @@
 package main
 
 import (
-	"encoding/json"
 	"fmt"
-	"github.com/memphisdev/memphis.go"
 	"os"
+
+	"github.com/Slowhigh/gogger/producer/proto"
+	"github.com/memphisdev/memphis.go"
 )
 
 type Message struct {
@@ -12,7 +13,7 @@ type Message struct {
 }
 
 func main() {
-	conn, err := memphis.Connect("localhost", "producer1", memphis.Password("#B8T2oA-mZ"), memphis.AccountId(1))
+	conn, err := memphis.Connect("localhost", "producer_1", memphis.Password("#B8T2oA-mZ"), memphis.AccountId(1))
 	if err != nil {
 		os.Exit(1)
 	}
@@ -25,20 +26,15 @@ func main() {
 	}
 
 	for i := 0; i < 1000000; i++ {
-		message := Message{
-			Message: fmt.Sprintf("msg - %d", i),
+		info := proto.Info{
+			Msg: fmt.Sprintf("msg - %d", i),
 		}
 
-		binary, err := json.Marshal(message)
+		err = p.Produce(&info, memphis.AsyncProduce())
 		if err != nil {
 			panic(err)
 		}
 
-		err = p.Produce(binary, memphis.AsyncProduce())
-		if err != nil {
-			panic(err)
-		}
-
-		fmt.Printf("[Publish] %s\n", message.Message)
+		fmt.Printf("[Produce] %s\n", info.Msg)
 	}
 }
