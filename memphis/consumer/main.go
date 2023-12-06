@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"fmt"
+	"log"
 	"os"
 	"time"
 
@@ -10,7 +11,7 @@ import (
 )
 
 func main() {
-	conn, err := memphis.Connect("localhost", "consumer1", memphis.Password("587#h%@lW#"), memphis.AccountId(1))
+	conn, err := memphis.Connect("localhost", "consumer_1", memphis.Password("587#h%@lW#"), memphis.AccountId(1))
 	if err != nil {
 		os.Exit(1)
 	}
@@ -24,22 +25,22 @@ func main() {
 
 	handler := func(msgs []*memphis.Msg, err error, ctx context.Context) {
 		if err != nil {
-			fmt.Printf("Fetch failed: %v", err)
-			return
+			panic(err)
 		}
 
 		for _, msg := range msgs {
-			fmt.Println(string(msg.Data()))
+			data, err := msg.DataDeserialized()
+
+			if err != nil {
+				panic(err)
+			}
+			fmt.Printf("[Consume] %+v\n", data)
 			msg.Ack()
 		}
 	}
 
 	ctx := context.Background()
-	// ctx = context.WithValue(ctx, "key", "value")
 	consumer.SetContext(ctx)
 	consumer.Consume(handler)
-	// The program will close the connection after 30 seconds,
-	// the message handler may be called after the connection closed
-	// so the handler may receive a timeout error
 	time.Sleep(30 * time.Minute)
 }
