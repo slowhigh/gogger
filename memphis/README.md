@@ -9,10 +9,10 @@ docker compose -f docker-compose.yml -p memphis up -d
 - root : memphis
 
 ### Client [name : password]
-- producer1 : #B8T2oA-mZ
+- producer_1 : #B8T2oA-mZ
 
-- producer2 : !0OgDZ6!%D2-34O@
+- producer_2 : !0OgDZ6!%D2-34O@
 
-- consumer1: 587#h%@lW#
+- consumer_1: 587#h%@lW#
 
-- consumer2: %SnVFa9P8mr
+- consumer_2: %SnVFa9P8mr
