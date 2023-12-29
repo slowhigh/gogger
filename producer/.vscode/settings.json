@@ -1,7 +1,15 @@
 {
     "cSpell.words": [
         "gogger",
+        "gonic",
+        "interactor",
         "memphisdev",
-        "Slowhigh"
-    ]
+        "Proto",
+        "protobuf",
+        "protoc",
+        "Protos",
+        "Slowhigh",
+        "timestamppb",
+        "usecase"
+    ],
 }
