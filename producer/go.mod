@@ -4,6 +4,7 @@ go 1.21.0
 
 require (
 	github.com/gin-gonic/gin v1.9.1
+	github.com/google/wire v0.5.0
 	github.com/memphisdev/memphis.go v1.1.4
 	google.golang.org/protobuf v1.30.0
 )

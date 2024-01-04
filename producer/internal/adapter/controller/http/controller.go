@@ -3,17 +3,16 @@ package http
 import (
 	"github.com/Slowhigh/gogger/producer/internal/adapter/controller/http/dto"
 	"github.com/Slowhigh/gogger/producer/internal/entity"
-	"github.com/Slowhigh/gogger/producer/internal/entity/interactor"
-	"github.com/Slowhigh/gogger/producer/internal/usecase"
+	"github.com/Slowhigh/gogger/producer/internal/usecase/message"
 )
 
 type Controller struct {
-	msgUsecase usecase.MessageUsecase
+	msgUsecase message.MessageUsecase
 }
 
-func NewController(mp interactor.MessageProducer) Controller {
+func NewController(msgUsecase message.MessageUsecase) Controller {
 	return Controller{
-		msgUsecase: usecase.NewMessageUsecase(mp),
+		msgUsecase: msgUsecase,
 	}
 }
 

@@ -1,4 +1,4 @@
-package usecase
+package message
 
 import (
 	"log/slog"
@@ -10,10 +10,10 @@ import (
 )
 
 type MessageUsecase struct {
-	messageProducer interactor.MessageProducer
+	messageProducer interactor.Producer
 }
 
-func NewMessageUsecase(mp interactor.MessageProducer) MessageUsecase {
+func NewMessageUsecase(mp interactor.Producer) MessageUsecase {
 	return MessageUsecase{messageProducer: mp}
 }
 

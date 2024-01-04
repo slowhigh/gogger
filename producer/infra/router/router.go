@@ -15,6 +15,6 @@ func NewRouter(ctrl http.Controller) Router {
 	return Router{router: r}
 }
 
-func (r Router) Serve() error {
+func (r Router) Run() error {
 	return r.router.Run(":5000")
 }

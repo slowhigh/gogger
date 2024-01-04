@@ -1,5 +1,5 @@
 package interactor
 
-type MessageProducer interface {
+type Producer interface {
 	Produce(msg any) error
 }
