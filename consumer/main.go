@@ -3,11 +3,13 @@ package main
 import (
 	"context"
 	"fmt"
-	"log"
 	"os"
 	"time"
 
+	"github.com/Slowhigh/gogger/consumer/internal/entity"
+	"github.com/Slowhigh/gogger/consumer/proto"
 	"github.com/memphisdev/memphis.go"
+	protobuf "google.golang.org/protobuf/proto"
 )
 
 func main() {
@@ -29,12 +31,22 @@ func main() {
 		}
 
 		for _, msg := range msgs {
-			data, err := msg.DataDeserialized()
-
+			var accessLogPb proto.AccessLog
+			err = protobuf.Unmarshal(msg.Data(), &accessLogPb)
 			if err != nil {
 				panic(err)
 			}
-			fmt.Printf("[Consume] %+v\n", data)
+
+			accessLog := entity.AccessLog{
+				Timestamp:    accessLogPb.Timestamp.AsTime(),
+				IsNormalMode: accessLogPb.IsNormalMode,
+				IsLogin:      accessLogPb.IsLogin,
+				UserName:     accessLogPb.UserName,
+				DeviceName:   accessLogPb.DeviceName,
+				Ip:           accessLogPb.Ip,
+			}
+
+			fmt.Printf("[Consume] %+v\n", accessLog)
 			msg.Ack()
 		}
 	}
