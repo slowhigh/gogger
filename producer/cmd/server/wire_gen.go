@@ -7,22 +7,26 @@
 package main
 
 import (
+	"github.com/Slowhigh/gogger/producer/infra/config"
 	"github.com/Slowhigh/gogger/producer/infra/producer"
 	"github.com/Slowhigh/gogger/producer/infra/router"
 	"github.com/Slowhigh/gogger/producer/internal/adapter/controller/http"
 	"github.com/Slowhigh/gogger/producer/internal/usecase/message"
-	"github.com/memphisdev/memphis.go"
 )
 
 // Injectors from wire.go:
 
-func InitializeServer(conn *memphis.Conn) (router.Router, error) {
-	interactorProducer, err := producer.NewProducer(conn)
+func InitServer() (router.Router, error) {
+	configConfig, err := config.NewConfig()
+	if err != nil {
+		return router.Router{}, err
+	}
+	interactorProducer, err := producer.NewProducer(configConfig)
 	if err != nil {
 		return router.Router{}, err
 	}
 	messageUsecase := message.NewMessageUsecase(interactorProducer)
 	controller := http.NewController(messageUsecase)
-	routerRouter := router.NewRouter(controller)
+	routerRouter := router.NewRouter(configConfig, controller)
 	return routerRouter, nil
 }

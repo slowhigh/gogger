@@ -1,0 +1,13 @@
+{
+  "http": {
+    "port": 5000,
+    "mode": "debug" 
+  },
+  "memphis": {
+    "host": "localhost",
+    "user_name": "producer_1",
+    "password": "#B8T2oA-mZ",
+    "station_name": "default",
+    "producer_name": "pro-1"
+  }
+}

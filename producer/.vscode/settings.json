@@ -3,6 +3,7 @@
         "gogger",
         "gonic",
         "interactor",
+        "mapstructure",
         "memphisdev",
         "Proto",
         "protobuf",
