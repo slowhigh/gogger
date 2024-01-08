@@ -1,0 +1,19 @@
+{
+  "memphis": {
+    "host": "localhost",
+    "user_name": "consumer_1",
+    "password": "587#h%@lW#",
+    "access_message_station_name": "default",
+    "consumer_name": "con-1",
+    "consumer_group_name": "con",
+    "pull_interval": 1,
+    "batch_size": 100
+  },
+  "database": {
+    "host": "localhost",
+    "port": 5433,
+    "user_name": "gogger",
+    "password": "gogger1!",
+    "db_name": "gogger"
+  }
+}
