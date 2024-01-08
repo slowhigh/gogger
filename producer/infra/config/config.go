@@ -19,11 +19,11 @@ type Http struct {
 }
 
 type Memphis struct {
-	Host         string `mapstructure:"host"`
-	UserName     string `mapstructure:"user_name"`
-	Password     string `mapstructure:"password"`
-	StationName  string `mapstructure:"station_name"`
-	ProducerName string `mapstructure:"producer_name"`
+	Host                     string `mapstructure:"host"`
+	UserName                 string `mapstructure:"user_name"`
+	Password                 string `mapstructure:"password"`
+	AccessMessageStationName string `mapstructure:"access_message_station_name"`
+	ProducerName             string `mapstructure:"producer_name"`
 }
 
 func NewConfig() (*Config, error) {

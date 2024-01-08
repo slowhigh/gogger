@@ -4,17 +4,19 @@ import (
 	"log/slog"
 
 	"github.com/Slowhigh/gogger/producer/internal/entity"
-	"github.com/Slowhigh/gogger/producer/internal/entity/interactor"
 	"github.com/Slowhigh/gogger/producer/internal/entity/proto"
+	"github.com/Slowhigh/gogger/producer/internal/usecase/interactor"
 	"google.golang.org/protobuf/types/known/timestamppb"
 )
 
 type MessageUsecase struct {
-	messageProducer interactor.Producer
+	producer interactor.Producer
 }
 
-func NewMessageUsecase(mp interactor.Producer) MessageUsecase {
-	return MessageUsecase{messageProducer: mp}
+func NewMessageUsecase(p interactor.Producer) MessageUsecase {
+	return MessageUsecase{
+		producer: p,
+	}
 }
 
 func (mu MessageUsecase) ProduceAccessLog(msg entity.AccessLog) bool {
@@ -27,8 +29,7 @@ func (mu MessageUsecase) ProduceAccessLog(msg entity.AccessLog) bool {
 		Ip:           msg.Ip,
 	}
 
-	err := mu.messageProducer.Produce(&accessLogProto)
-	if err != nil {
+	if err := mu.producer.ProduceAccessLog(&accessLogProto); err != nil {
 		slog.Error(err.Error())
 		return false
 	}
