@@ -1,9 +1,16 @@
 {
   "cSpell.words": [
+    "dbname",
     "gogger",
     "gonic",
+    "gorm",
+    "interactor",
+    "mapstructure",
     "memphisdev",
     "protobuf",
-    "Slowhigh"
+    "Slowhigh",
+    "sslmode",
+    "Usecase",
+    "wireinject"
   ]
 }
