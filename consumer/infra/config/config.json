@@ -1,8 +1,8 @@
 {
   "memphis": {
     "host": "localhost",
-    "user_name": "consumer_1",
-    "password": "587#h%@lW#",
+    "user_name": "root",
+    "password": "memphis",
     "access_message_station_name": "default",
     "consumer_name": "con-1",
     "consumer_group_name": "con",
