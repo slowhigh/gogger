@@ -5,8 +5,8 @@
   },
   "memphis": {
     "host": "localhost",
-    "user_name": "producer_1",
-    "password": "#B8T2oA-mZ",
+    "user_name": "root",
+    "password": "memphis",
     "access_message_station_name": "default",
     "producer_name": "pro-1"
   }
