@@ -6,10 +6,9 @@ import (
 	"time"
 
 	"github.com/Slowhigh/gogger/consumer/infra/config"
+	"github.com/Slowhigh/gogger/consumer/infra/consumer/handler"
 	"github.com/Slowhigh/gogger/consumer/internal/adapter/controller/sub"
-	"github.com/Slowhigh/gogger/consumer/internal/entity/proto"
 	"github.com/memphisdev/memphis.go"
-	protobuf "google.golang.org/protobuf/proto"
 )
 
 type Consumer struct {
@@ -43,25 +42,12 @@ func NewConsumer(conf *config.Config, sc sub.Controller) (*Consumer, error) {
 }
 
 func (c Consumer) Run() error {
-	accessLogHandler := func(msgs []*memphis.Msg, err error, ctx context.Context) {
-		if err != nil {
-			return
-		}
-
-		for _, msg := range msgs {
-			var accessLogPb proto.AccessLog
-			err = protobuf.Unmarshal(msg.Data(), &accessLogPb)
-			if err != nil {
-				panic(err)
-			}
-
-			if c.subCtrl.ConsumeAccessLog(&accessLogPb) {
-				msg.Ack()
-			}
-		}
-	}
-
-	if err := c.accessLogConsumer.Consume(accessLogHandler); err != nil {
+	err := c.accessLogConsumer.Consume(
+		func(m []*memphis.Msg, err error, ctx context.Context) {
+			handler.AccessLogHandler(c.subCtrl.ConsumeAccessLog, m, err, ctx)
+		},
+	)
+	if err != nil {
 		return err
 	}
 

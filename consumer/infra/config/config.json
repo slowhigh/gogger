@@ -11,7 +11,7 @@
   },
   "database": {
     "host": "localhost",
-    "port": 5433,
+    "port": 5432,
     "user_name": "gogger",
     "password": "gogger1!",
     "db_name": "gogger"

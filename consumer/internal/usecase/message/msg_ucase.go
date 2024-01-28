@@ -4,7 +4,6 @@ import (
 	"log/slog"
 
 	"github.com/Slowhigh/gogger/consumer/internal/entity"
-	"github.com/Slowhigh/gogger/consumer/internal/entity/proto"
 	"github.com/Slowhigh/gogger/consumer/internal/usecase/interactor"
 )
 
@@ -18,16 +17,7 @@ func NewMessageUsecase(accessLogRepo interactor.AccessLog) MessageUsecase {
 	}
 }
 
-func (mu MessageUsecase) CreateAccessLog(accessLogPb *proto.AccessLog) bool {
-	accessLog := entity.AccessLog{
-		Timestamp:    accessLogPb.Timestamp.AsTime(),
-		IsNormalMode: accessLogPb.IsNormalMode,
-		IsLogin:      accessLogPb.IsLogin,
-		UserName:     accessLogPb.UserName,
-		DeviceName:   accessLogPb.DeviceName,
-		Ip:           accessLogPb.Ip,
-	}
-
+func (mu MessageUsecase) CreateAccessLog(accessLog entity.AccessLog) bool {
 	if err := mu.accessLogRepo.Create(&accessLog); err != nil {
 		slog.Error(err.Error())
 		return false

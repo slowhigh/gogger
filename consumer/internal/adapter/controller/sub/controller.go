@@ -1,7 +1,8 @@
 package sub
 
 import (
-	"github.com/Slowhigh/gogger/consumer/internal/entity/proto"
+	"github.com/Slowhigh/gogger/consumer/internal/adapter/controller/sub/dto"
+	"github.com/Slowhigh/gogger/consumer/internal/entity"
 	"github.com/Slowhigh/gogger/consumer/internal/usecase/message"
 )
 
@@ -15,6 +16,14 @@ func NewController(mu message.MessageUsecase) Controller {
 	}
 }
 
-func (c Controller) ConsumeAccessLog(accessLogPb *proto.AccessLog) bool {
-	return c.msgUsecase.CreateAccessLog(accessLogPb)
+func (c Controller) ConsumeAccessLog(dto dto.AccessLogDto) bool {
+	accessLog := entity.AccessLog{
+		Timestamp:    dto.Timestamp,
+		IsNormalMode: dto.IsNormalMode,
+		IsLogin:      dto.IsLogin,
+		UserName:     dto.UserName,
+		DeviceName:   dto.DeviceName,
+		Ip:           dto.Ip,
+	}
+	return c.msgUsecase.CreateAccessLog(accessLog)
 }
