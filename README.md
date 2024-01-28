@@ -54,7 +54,7 @@ $ curl --location 'http://localhost:5000/log/access' \
 }'
 ```
 
-#### 6. Can check the message on the Station page
+#### 6. Check the message on the Station page
 - go to http://localhost:9000/stations/access-message
   ![image](https://github.com/Slowhigh/gogger/assets/37216082/2462a2e5-e428-4aac-a9d9-6f56f8a19e84)
 
