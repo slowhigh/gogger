@@ -10,21 +10,52 @@ $ curl -s https://memphisdev.github.io/memphis-docker/docker-compose.yml -o dock
 #### 2. Deploy Postgres
 ```bash
 $ docker run -d \
--p 5433:5432 \
+-p 5432:5432 \
 -e POSTGRES_USER=gogger \
 -e POSTGRES_PASSWORD=gogger1! \
 -e POSTGRES_DB=gogger \
 --name postgres postgres:alpine
 ```
 
-$ curl --location --request POST 'http://127.0.0.1:4444/auth/authenticate' \
---header 'Content-Type: application/json' \
---data-raw '{
-    "username": "root",
-    "password": "memphis",
-    "token_expiry_in_minutes": 6000000,
-    "refresh_token_expiry_in_minutes": 100000
-}'
+#### 3. Run Consumer Server
+```bash
+$ cd ./consumer/ && go run ./cmd/server/
 
-{"expires_in":123932266980000,"jwt":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50X2lkIjoxLCJjb25uZWN0aW9uX3Rva2VuIjoiIiwiZXhwIjoyMDY1NTM3NzgzLCJwYXNzd29yZCI6Im1lbXBoaXMiLCJ1c2VybmFtZSI6InJvb3QifQ.FYwGMcX93weZlT3QBq5Rv-jHtEu7JtDo8bOV1QXKyC0","jwt_refresh_token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50X2lkIjoxLCJjb25uZWN0aW9uX3Rva2VuIjoiIiwiZXhwIjoxNzExNTM3NzgzLCJwYXNzd29yZCI6Im1lbXBoaXMiLCJ0b2tlbl9leHAiOjIwNjU1Mzc3ODMsInVzZXJuYW1lIjoicm9vdCJ9.4Wmkp9sWAlfeQeSHPVv1TcVUquUIulBYkyqvA_w_KL4","refresh_token_expires_in":123932266980000}
+# 2024/01/28 23:13:12 INFO start consuming messages
 ```
+
+#### 4. Run Producer Server (new terminal)
+```bash
+$ cd ./producer/ && go run ./cmd/server/
+
+# [GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+# 
+# [GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+#  - using env:   export GIN_MODE=release
+#  - using code:  gin.SetMode(gin.ReleaseMode)
+# 
+# [GIN-debug] POST   /log/access               --> github.com/Slowhigh/gogger/producer/infra/router.NewRouter.func1 (3 handlers)
+# [GIN-debug] [WARNING] You trusted all proxies, this is NOT safe. We recommend you to set a value.
+# Please check https://pkg.go.dev/github.com/gin-gonic/gin#readme-don-t-trust-all-proxies for details. 
+# [GIN-debug] Listening and serving HTTP on :5000
+```
+
+#### 5. Send the HTTP message to the Producer (new terminal)
+```bash
+$ curl --location 'http://localhost:5000/log/access' \
+--header 'Content-Type: application/json' \
+--data '{
+    "timestamp": "2006-01-02T15:04:05Z",
+    "is_normal_mode": true,
+    "is_login": true,
+    "user_name": "john",
+    "device_name": "slowhigh",
+    "ip": "192.168.0.1"
+}'
+```
+
+#### 6. Can check the message on the Station page
+- go to http://localhost:9000/stations/access-message
+  ![image](https://github.com/Slowhigh/gogger/assets/37216082/2462a2e5-e428-4aac-a9d9-6f56f8a19e84)
+
+
