@@ -20,12 +20,12 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.sha }}
 
+      - run: cd ./producer
+
       - name: Set up Go
         uses: actions/setup-go@v4
         with:
           go-version: ${{ matrix.go }}
-
-      - run: cd ./producer
 
       - name: Build producer
         run: go build -v -o ./server ./cmd/server
