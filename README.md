@@ -1,4 +1,9 @@
 # Distributed Logging
+### producer
+[![Go Report Card](https://goreportcard.com/badge/github.com/Slowhigh/gogger/producer)](https://goreportcard.com/report/github.com/Slowhigh/gogger/producer)
+### consumer
+[![Go Report Card](https://goreportcard.com/badge/github.com/Slowhigh/gogger/consumer)](https://goreportcard.com/report/github.com/Slowhigh/gogger/consumer)
+
 
 ### Quick start
 #### 1. Deploy Memphis Broker
