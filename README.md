@@ -1,11 +1,14 @@
-# Distributed Logging
-### producer
+# gogger (go + logger)
+Distributed Logging
+#### - producer server 📋
+[![Build Status](https://github.com/Slowhigh/gogger/actions/workflows/ci-producer.yml/badge.svg?branch=main)](https://github.com/features/actions)
 [![Go Report Card](https://goreportcard.com/badge/github.com/Slowhigh/gogger/producer)](https://goreportcard.com/report/github.com/Slowhigh/gogger/producer)
-### consumer
+#### - consumer server 📋
+[![Build Status](https://github.com/Slowhigh/gogger/actions/workflows/ci-consumer.yml/badge.svg?branch=main)](https://github.com/features/actions)
 [![Go Report Card](https://goreportcard.com/badge/github.com/Slowhigh/gogger/consumer)](https://goreportcard.com/report/github.com/Slowhigh/gogger/consumer)
 
 
-### Quick start
+## Quick start 🚀
 #### 1. Deploy Memphis Broker
 ```bash
 $ curl -s https://memphisdev.github.io/memphis-docker/docker-compose.yml -o docker-compose.yml \
@@ -60,6 +63,7 @@ $ curl --location 'http://localhost:5000/log/access' \
 ```
 
 #### 6. Check the message on the Station page
+- initial account - id: `root` / pw: `memphis`
 - go to http://localhost:9000/stations/access-message
   ![image](https://github.com/Slowhigh/gogger/assets/37216082/2462a2e5-e428-4aac-a9d9-6f56f8a19e84)
 
