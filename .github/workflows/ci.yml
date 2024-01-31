@@ -17,14 +17,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-        with:
-          sparse-checkout: ./producer
-
-      - run: ls -al
-
-      - run: cd ./producer
-
-      - run: ls -al
 
       - name: Set up Go
         uses: actions/setup-go@v4
@@ -32,7 +24,9 @@ jobs:
           go-version: ${{ matrix.go }}
 
       - name: Build producer
+        working-directory: ./producer
         run: go build -v -o ./server ./cmd/server
 
       - name: Test producer
+        working-directory: ./producer
         run: go test -v ./cmd/server
