@@ -3,10 +3,11 @@ Distributed Logging
 #### - producer server 📋
 [![Build Status](https://github.com/Slowhigh/gogger/actions/workflows/ci-producer.yml/badge.svg?branch=main)](https://github.com/features/actions)
 [![Go Report Card](https://goreportcard.com/badge/github.com/Slowhigh/gogger/producer)](https://goreportcard.com/report/github.com/Slowhigh/gogger/producer)
+[![codebeat badge](https://codebeat.co/badges/ecde5eef-54fa-412f-bbe4-3b63e488809c)](https://codebeat.co/projects/github-com-slowhigh-gogger-producer)
 #### - consumer server 📋
 [![Build Status](https://github.com/Slowhigh/gogger/actions/workflows/ci-consumer.yml/badge.svg?branch=main)](https://github.com/features/actions)
 [![Go Report Card](https://goreportcard.com/badge/github.com/Slowhigh/gogger/consumer)](https://goreportcard.com/report/github.com/Slowhigh/gogger/consumer)
-
+[![codebeat badge](https://codebeat.co/badges/128b9146-2e6f-4490-8346-3bf7f17c6bf5)](https://codebeat.co/projects/github-com-slowhigh-gogger-consumer)
 
 ## Quick start 🚀
 #### 1. Deploy Memphis Broker
