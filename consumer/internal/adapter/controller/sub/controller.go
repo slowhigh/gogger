@@ -17,13 +17,12 @@ func NewController(mu message.MessageUsecase) Controller {
 }
 
 func (c Controller) ConsumeAccessLog(dto dto.AccessLogDto) bool {
-	accessLog := entity.AccessLog{
+	return c.msgUsecase.CreateAccessLog(entity.AccessLog{
 		Timestamp:    dto.Timestamp,
 		IsNormalMode: dto.IsNormalMode,
 		IsLogin:      dto.IsLogin,
 		UserName:     dto.UserName,
 		DeviceName:   dto.DeviceName,
 		Ip:           dto.Ip,
-	}
-	return c.msgUsecase.CreateAccessLog(accessLog)
+	})
 }
