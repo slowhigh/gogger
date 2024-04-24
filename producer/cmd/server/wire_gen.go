@@ -10,7 +10,7 @@ import (
 	"github.com/Slowhigh/gogger/producer/infra/config"
 	"github.com/Slowhigh/gogger/producer/infra/producer"
 	"github.com/Slowhigh/gogger/producer/infra/router"
-	"github.com/Slowhigh/gogger/producer/internal/adapter/controller/http"
+	"github.com/Slowhigh/gogger/producer/internal/adapter/controller/rest"
 	"github.com/Slowhigh/gogger/producer/internal/usecase/message"
 )
 
@@ -26,7 +26,7 @@ func InitServer() (router.Router, error) {
 		return router.Router{}, err
 	}
 	messageUsecase := message.NewMessageUsecase(interactorProducer)
-	controller := http.NewController(messageUsecase)
+	controller := rest.NewController(messageUsecase)
 	routerRouter := router.NewRouter(configConfig, controller)
 	return routerRouter, nil
 }

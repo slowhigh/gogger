@@ -4,7 +4,8 @@ import (
 	"fmt"
 
 	"github.com/Slowhigh/gogger/producer/infra/config"
-	"github.com/Slowhigh/gogger/producer/internal/adapter/controller/http"
+	"github.com/Slowhigh/gogger/producer/infra/router/handler"
+	"github.com/Slowhigh/gogger/producer/internal/adapter/controller/rest"
 	"github.com/gin-gonic/gin"
 )
 
@@ -13,13 +14,13 @@ type Router struct {
 	conf   *config.Config
 }
 
-func NewRouter(conf *config.Config, ctrl http.Controller) Router {
+func NewRouter(conf *config.Config, ctrl rest.Controller) Router {
 	if conf.Http.Mode == "release" {
 		gin.SetMode(gin.ReleaseMode)
 	}
 
 	r := gin.Default()
-	r.POST("/log/access", func(c *gin.Context) { accessLogHandler(c, ctrl) })
+	r.POST("/log/access", func(c *gin.Context) { handler.AccessLogHandler(c, ctrl) })
 	return Router{
 		router: r,
 		conf:   conf,

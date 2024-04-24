@@ -1,7 +1,7 @@
-package http
+package rest
 
 import (
-	"github.com/Slowhigh/gogger/producer/internal/adapter/controller/http/dto"
+	"github.com/Slowhigh/gogger/producer/internal/adapter/controller/rest/dto"
 	"github.com/Slowhigh/gogger/producer/internal/entity"
 	"github.com/Slowhigh/gogger/producer/internal/usecase/message"
 )
