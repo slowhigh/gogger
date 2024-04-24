@@ -1,7 +1,7 @@
-package sub
+package controller
 
 import (
-	"github.com/Slowhigh/gogger/consumer/internal/adapter/controller/sub/dto"
+	"github.com/Slowhigh/gogger/consumer/internal/adapter/controller/dto"
 	"github.com/Slowhigh/gogger/consumer/internal/entity"
 	"github.com/Slowhigh/gogger/consumer/internal/usecase/message"
 )
