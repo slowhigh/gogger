@@ -19,7 +19,7 @@ func NewProducer(conf *config.Config) (interactor.Producer, error) {
 		return nil, err
 	}
 
-	accessLogProducer, err := conn.CreateProducer(conf.Memphis.AccessMessageStationName, conf.Memphis.ProducerName)
+	alp, err := conn.CreateProducer(conf.Memphis.AccessMessageStationName, conf.Memphis.ProducerName)
 	if err != nil {
 		return nil, err
 	}
@@ -31,7 +31,7 @@ func NewProducer(conf *config.Config) (interactor.Producer, error) {
 
 	return &Producer{
 		conn:              conn,
-		accessLogProducer: accessLogProducer,
+		accessLogProducer: alp,
 		//jobLogProducer: jobLogProducer,
 	}, nil
 }
