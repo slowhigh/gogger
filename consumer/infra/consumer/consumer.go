@@ -7,17 +7,17 @@ import (
 
 	"github.com/Slowhigh/gogger/consumer/infra/config"
 	"github.com/Slowhigh/gogger/consumer/infra/consumer/handler"
-	"github.com/Slowhigh/gogger/consumer/internal/adapter/controller/sub"
+	"github.com/Slowhigh/gogger/consumer/internal/adapter/controller"
 	"github.com/memphisdev/memphis.go"
 )
 
 type Consumer struct {
 	conn              *memphis.Conn
 	accessLogConsumer *memphis.Consumer
-	subCtrl           sub.Controller
+	ctrl              controller.Controller
 }
 
-func NewConsumer(conf *config.Config, sc sub.Controller) (*Consumer, error) {
+func NewConsumer(conf *config.Config, sc controller.Controller) (*Consumer, error) {
 	conn, err := memphis.Connect(conf.Memphis.Host, conf.Memphis.UserName, memphis.Password(conf.Memphis.Password))
 	if err != nil {
 		return nil, err
@@ -37,14 +37,14 @@ func NewConsumer(conf *config.Config, sc sub.Controller) (*Consumer, error) {
 	return &Consumer{
 		conn:              conn,
 		accessLogConsumer: alc,
-		subCtrl:           sc,
+		ctrl:              sc,
 	}, nil
 }
 
 func (c Consumer) Run() error {
 	err := c.accessLogConsumer.Consume(
 		func(m []*memphis.Msg, err error, ctx context.Context) {
-			handler.AccessLogHandler(c.subCtrl.ConsumeAccessLog, m, err, ctx)
+			handler.AccessLogHandler(c.ctrl.ConsumeAccessLog, m, err, ctx)
 		},
 	)
 	if err != nil {

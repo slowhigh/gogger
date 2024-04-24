@@ -11,7 +11,7 @@ import (
 	"github.com/Slowhigh/gogger/consumer/infra/consumer"
 	"github.com/Slowhigh/gogger/consumer/infra/database"
 	"github.com/Slowhigh/gogger/consumer/infra/database/repository"
-	"github.com/Slowhigh/gogger/consumer/internal/adapter/controller/sub"
+	"github.com/Slowhigh/gogger/consumer/internal/adapter/controller"
 	"github.com/Slowhigh/gogger/consumer/internal/usecase/message"
 )
 
@@ -31,7 +31,7 @@ func InitServer() (*consumer.Consumer, error) {
 		return nil, err
 	}
 	messageUsecase := message.NewMessageUsecase(accessLog)
-	controller := sub.NewController(messageUsecase)
+	controller := controller.NewController(messageUsecase)
 	consumerConsumer, err := consumer.NewConsumer(configConfig, controller)
 	if err != nil {
 		return nil, err

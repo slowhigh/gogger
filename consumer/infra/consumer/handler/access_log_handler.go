@@ -3,7 +3,7 @@ package handler
 import (
 	"context"
 
-	"github.com/Slowhigh/gogger/consumer/internal/adapter/controller/sub/dto"
+	"github.com/Slowhigh/gogger/consumer/internal/adapter/controller/dto"
 	"github.com/Slowhigh/gogger/consumer/internal/entity/proto"
 	"github.com/memphisdev/memphis.go"
 	protobuf "google.golang.org/protobuf/proto"
