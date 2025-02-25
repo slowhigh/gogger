@@ -1,5 +1,7 @@
 # gogger (go + logger)
 Distributed Logging
+![image](https://github.com/user-attachments/assets/f916abde-07c8-44b2-aff3-015d1797288b)
+
 #### - producer server 📋
 [![Build Status](https://github.com/Slowhigh/gogger/actions/workflows/ci-producer.yml/badge.svg?branch=main)](https://github.com/features/actions)
 [![Go Report Card](https://goreportcard.com/badge/github.com/Slowhigh/gogger/producer)](https://goreportcard.com/report/github.com/Slowhigh/gogger/producer)
